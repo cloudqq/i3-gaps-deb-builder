@@ -23,7 +23,10 @@ RUN apt-get update && apt-get install -y \
   dh-autoreconf \
   git
 
-RUN apt-get build-dep -y i3-wm
+RUN sed -i -- 's/#deb-src/deb-src/g' /etc/apt/sources.list && sed -i -- 's/# deb-src/deb-src/g' /etc/apt/sources.list \
+&& apt-get update \
+&& apt-get install -y libxcb-shape0-dev \
+&& apt-get build-dep -y i3-wm
 
 RUN git clone -b gaps https://www.github.com/Airblader/i3  /opt/i3
 
